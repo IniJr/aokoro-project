@@ -160,7 +160,7 @@ def get_reminder_third_month():
         response_stream.append(send_sms_reminder(each))
     print(datetime.now()," | SMS Stream: ", sms_stream, file=sys.stderr)
     print(datetime.now()," | Response Stream: ", response_stream, file=sys.stderr)
-    return json.dumps(response_stream)v
+    return json.dumps(response_stream)
 
 @api.route('/notifications/sms/send-reminder-sixth-month', methods=['GET'])
 def get_reminder_sixth_month():
