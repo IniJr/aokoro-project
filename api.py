@@ -6,9 +6,6 @@ from datetime import datetime
 import sys
 
 headers = {"Content-Type": "application/json", "Authorization": "Token ee778e60b355d4408e72e61e1ca53fda7661bc76"}
-# data = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aUaMWgTyxmZoWM947C7sQg/data.json", headers=headers)
-
-# facilities = [{"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"}]
 
 def send_sms_reminder(record):
     url = 'https://www.bulksmsnigeria.com/api/v2/sms/create'
