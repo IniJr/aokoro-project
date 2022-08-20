@@ -3,6 +3,7 @@ from flask import Flask, json
 import requests
 from fetch_and_classify import fetch_and_classify
 from datetime import datetime
+import sys
 
 headers = {"Content-Type": "application/json", "Authorization": "Token ee778e60b355d4408e72e61e1ca53fda7661bc76"}
 # data = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aUaMWgTyxmZoWM947C7sQg/data.json", headers=headers)
@@ -27,7 +28,7 @@ def send_sms_reminder(record):
     return response.json()
 
 def package_message(record):
-    file = open('flask-apis/messages.json')
+    file = open('/home/aokoro/flask-apis/aokoro-project/messages.json')
     message = json.load(file)
     first_name = record[0]["first_name"]
     edd = record[0]["edd"]
@@ -106,7 +107,7 @@ def get_registered_pregnant_women():
 
 @api.route('/notifications/sms/send-reminder-all', methods=['GET'])
 def get_reminder_all():
-    api.logger.info("Sending reminders to all at ", datetime.now())
+    print(datetime.now()," | Sending reminders to all", file=sys.stderr)
     classifier = fetch_and_classify()
     classified_data = classifier.classify_data("all")
     sms_stream = []
@@ -115,8 +116,8 @@ def get_reminder_all():
         sms_stream.append([each[0]["phone_number"], package_message(each)])
     for each in sms_stream:
         response_stream.append(send_sms_reminder(each))
-    api.logger.info("SMS Stream: ", sms_stream)
-    api.logger.info("Response Stream: ", response_stream)
+    print(datetime.now()," | SMS Stream: ", sms_stream, file=sys.stderr)
+    print(datetime.now()," | Response Stream: ", response_stream, file=sys.stderr)
     return json.dumps(response_stream)
 
 @api.route('/notifications/sms/send-reminder-first-visit', methods=['GET'])
