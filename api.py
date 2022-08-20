@@ -122,39 +122,138 @@ def get_reminder_all():
 
 @api.route('/notifications/sms/send-reminder-first-visit', methods=['GET'])
 def get_reminder_first_visit():
-        return
+    print(datetime.now()," | Sending reminders to first visits", file=sys.stderr)
+    classifier = fetch_and_classify()
+    classified_data = classifier.classify_data("first_visit")
+    sms_stream = []
+    response_stream = []
+    for each in classified_data:
+        sms_stream.append([each[0]["phone_number"], package_message(each)])
+    for each in sms_stream:
+        response_stream.append(send_sms_reminder(each))
+    print(datetime.now()," | SMS Stream: ", sms_stream, file=sys.stderr)
+    print(datetime.now()," | Response Stream: ", response_stream, file=sys.stderr)
+    return json.dumps(response_stream)
 
 @api.route('/notifications/sms/send-reminder-second-month', methods=['GET'])
 def get_reminder_second_month():
-        return
+    print(datetime.now()," | Sending reminders to pregnant women in their second month", file=sys.stderr)
+    classifier = fetch_and_classify()
+    classified_data = classifier.classify_data("second_month")
+    sms_stream = []
+    response_stream = []
+    for each in classified_data:
+        sms_stream.append([each[0]["phone_number"], package_message(each)])
+    for each in sms_stream:
+        response_stream.append(send_sms_reminder(each))
+    print(datetime.now()," | SMS Stream: ", sms_stream, file=sys.stderr)
+    print(datetime.now()," | Response Stream: ", response_stream, file=sys.stderr)
+    return json.dumps(response_stream)
 
 @api.route('/notifications/sms/send-reminder-third-month', methods=['GET'])
 def get_reminder_third_month():
-        return
+    print(datetime.now()," | Sending reminders to pregnant women in their third month", file=sys.stderr)
+    classifier = fetch_and_classify()
+    classified_data = classifier.classify_data("third_month")
+    sms_stream = []
+    response_stream = []
+    for each in classified_data:
+        sms_stream.append([each[0]["phone_number"], package_message(each)])
+    for each in sms_stream:
+        response_stream.append(send_sms_reminder(each))
+    print(datetime.now()," | SMS Stream: ", sms_stream, file=sys.stderr)
+    print(datetime.now()," | Response Stream: ", response_stream, file=sys.stderr)
+    return json.dumps(response_stream)v
 
 @api.route('/notifications/sms/send-reminder-sixth-month', methods=['GET'])
 def get_reminder_sixth_month():
-        return
+    print(datetime.now()," | Sending reminders to pregnant women in their sixth month", file=sys.stderr)
+    classifier = fetch_and_classify()
+    classified_data = classifier.classify_data("sixth_month")
+    sms_stream = []
+    response_stream = []
+    for each in classified_data:
+        sms_stream.append([each[0]["phone_number"], package_message(each)])
+    for each in sms_stream:
+        response_stream.append(send_sms_reminder(each))
+    print(datetime.now()," | SMS Stream: ", sms_stream, file=sys.stderr)
+    print(datetime.now()," | Response Stream: ", response_stream, file=sys.stderr)
+    return json.dumps(response_stream)
 
 @api.route('/notifications/sms/send-reminder-seventh-month', methods=['GET'])
 def get_reminder_seventh_month():
-        return
+    print(datetime.now()," | Sending reminders to pregnant women in their seventh month", file=sys.stderr)
+    classifier = fetch_and_classify()
+    classified_data = classifier.classify_data("seventh_month")
+    sms_stream = []
+    response_stream = []
+    for each in classified_data:
+        sms_stream.append([each[0]["phone_number"], package_message(each)])
+    for each in sms_stream:
+        response_stream.append(send_sms_reminder(each))
+    print(datetime.now()," | SMS Stream: ", sms_stream, file=sys.stderr)
+    print(datetime.now()," | Response Stream: ", response_stream, file=sys.stderr)
+    return json.dumps(response_stream)
 
 @api.route('/notifications/sms/send-reminder-ninth-month', methods=['GET'])
 def get_reminder_ninth_month():
-        return
+    print(datetime.now()," | Sending reminders to pregnant women in their ninth month", file=sys.stderr)
+    classifier = fetch_and_classify()
+    classified_data = classifier.classify_data("ninth_month")
+    sms_stream = []
+    response_stream = []
+    for each in classified_data:
+        sms_stream.append([each[0]["phone_number"], package_message(each)])
+    for each in sms_stream:
+        response_stream.append(send_sms_reminder(each))
+    print(datetime.now()," | SMS Stream: ", sms_stream, file=sys.stderr)
+    print(datetime.now()," | Response Stream: ", response_stream, file=sys.stderr)
+    return json.dumps(response_stream)
 
 @api.route('/notifications/sms/send-reminder-immunization-second-week', methods=['GET'])
 def get_reminder_second_week():
-        return
+    print(datetime.now()," | Sending reminders to mothers in their second week", file=sys.stderr)
+    classifier = fetch_and_classify()
+    classified_data = classifier.classify_data("second_week")
+    sms_stream = []
+    response_stream = []
+    for each in classified_data:
+        sms_stream.append([each[0]["phone_number"], package_message(each)])
+    for each in sms_stream:
+        response_stream.append(send_sms_reminder(each))
+    print(datetime.now()," | SMS Stream: ", sms_stream, file=sys.stderr)
+    print(datetime.now()," | Response Stream: ", response_stream, file=sys.stderr)
+    return json.dumps(response_stream)
 
 @api.route('/notifications/sms/send-reminder-immunization-fourth-week', methods=['GET'])
 def get_reminder_fourth_week():
-        return
+    print(datetime.now()," | Sending reminders to mothers in their fourth week", file=sys.stderr)
+    classifier = fetch_and_classify()
+    classified_data = classifier.classify_data("fourth_week")
+    sms_stream = []
+    response_stream = []
+    for each in classified_data:
+        sms_stream.append([each[0]["phone_number"], package_message(each)])
+    for each in sms_stream:
+        response_stream.append(send_sms_reminder(each))
+    print(datetime.now()," | SMS Stream: ", sms_stream, file=sys.stderr)
+    print(datetime.now()," | Response Stream: ", response_stream, file=sys.stderr)
+    return json.dumps(response_stream)
 
 @api.route('/notifications/sms/send-reminder-anc', methods=['GET'])
 def get_reminder_anc():
-        return
+    print(datetime.now()," | Sending reminders anc reminders", file=sys.stderr)
+    classifier = fetch_and_classify()
+    classified_data = classifier.classify_data("anc")
+    sms_stream = []
+    response_stream = []
+    for each in classified_data:
+        sms_stream.append([each[0]["phone_number"], package_message(each)])
+    for each in sms_stream:
+        response_stream.append(send_sms_reminder(each))
+    print(datetime.now()," | SMS Stream: ", sms_stream, file=sys.stderr)
+    print(datetime.now()," | Response Stream: ", response_stream, file=sys.stderr)
+    return json.dumps(response_stream)
 
 if __name__ == '__main__':
     from waitress import serve
