@@ -1,4 +1,5 @@
 
+from email.mime import application
 from flask import Flask, json
 import requests
 from fetch_and_classify import fetch_and_classify
@@ -50,45 +51,43 @@ def get_facilities():
 
 def get_appointments():
     data = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aUaMWgTyxmZoWM947C7sQg/data.json", headers=headers)
-    facilities = data.json()
-    return json.dumps(facilities)
+    appointments = data.json()
+    return json.dumps(appointments)
 
 def get_pregnant_women():
-    data = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aSwAuVXu9fckCrQh9fNgW5/data.json", headers=headers)
-    facilities = data.json()
-    return json.dumps(facilities)
+    data = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aGYift82vCMhQB9v7UrbzV/data.json", headers=headers)
+    pregnant_women = data.json()
+    return json.dumps(pregnant_women)
 
 @api.route('/facilities', methods=['GET'])
 def get_facilities_api():
-    facilities = get_facilities()
+    facilities = get_facilities()["results"]
     return json.dumps(facilities)
 
 @api.route('/appintments', methods=['GET'])
 def get_appointments_api():
-    appointments = get_appointments()
+    appointments = get_appointments()["results"]
     return json.dumps(appointments)
 
 @api.route('/pregnant_women', methods=['GET'])
 def get_pregnant_women_api():
-    pregnant_women = get_pregnant_women()
+    pregnant_women = get_pregnant_women()["results"]
     return json.dumps(pregnant_women)
 
 @api.route('/facilities/count', methods=['GET'])
 def get_count():
-    data = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aSwAuVXu9fckCrQh9fNgW5/data.json", headers=headers)
-    facilities = data.json()
-    return str(facilities["count"]+5)
+    count = get_facilities_api()["count"]
+    return str(count)
 
+@api.route('/pregnant_women/count', methods=['GET'])
+def get_count():
+    count = get_pregnant_women_api()["count"]
+    return str(count)
 
-@api.route('/facilities/filtered', methods=['GET'])
-def get_filtered():
-    data = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aSwAuVXu9fckCrQh9fNgW5/data.json", headers=headers)
-    facilities = data.json()
-    filtered = []
-    for each in facilities["results"]:
-        item = {"id": each["PW_card_no"], "age": each["P_age"], "marital_status": each["Marital_status"], "village": each[""], "health_facility": each["Health_Facility_ID"], "distance": each[""], "visit_status": each[""], anc_status: each[""], "i0": each[""], "i1": each[""], "i2": each[""]}
-        filtered.append(item)
-    return str("")
+@api.route('/appointments/count', methods=['GET'])
+def get_count():
+    count = get_appointments_api()["count"]
+    return str(count)
 
 @api.route('/prototype/registered-pregnant-women', methods=['GET'])
 def get_registered_pregnant_women():
