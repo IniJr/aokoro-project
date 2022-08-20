@@ -104,5 +104,4 @@ class fetch_and_classify:
                         self.data_classifier.append([{"first_name": first_name, "phone_number": phone_number, "edd": edd, "next_anc_date": next_anc_date}, "anc reminder"])
                 else:
                     pass
-                    # self.data_classifier.append([{"first_name": first_name, "phone_number": phone_number, "edd": edd, "next_anc_date": next_anc_date, "end_of_pregnancy_date": end_of_pregnancy_date, "pregnancy_outcome": pregnancy_outcome}, "no class"])
         return self.data_classifier
