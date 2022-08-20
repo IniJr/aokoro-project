@@ -43,11 +43,35 @@ def package_message(record):
 
 api = Flask(__name__)
 
-@api.route('/facilities', methods=['GET'])
 def get_facilities():
     data = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aSwAuVXu9fckCrQh9fNgW5/data.json", headers=headers)
     facilities = data.json()
     return json.dumps(facilities)
+
+def get_appointments():
+    data = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aUaMWgTyxmZoWM947C7sQg/data.json", headers=headers)
+    facilities = data.json()
+    return json.dumps(facilities)
+
+def get_pregnant_women():
+    data = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aSwAuVXu9fckCrQh9fNgW5/data.json", headers=headers)
+    facilities = data.json()
+    return json.dumps(facilities)
+
+@api.route('/facilities', methods=['GET'])
+def get_facilities_api():
+    facilities = get_facilities()
+    return json.dumps(facilities)
+
+@api.route('/appintments', methods=['GET'])
+def get_appointments_api():
+    appointments = get_appointments()
+    return json.dumps(appointments)
+
+@api.route('/pregnant_women', methods=['GET'])
+def get_pregnant_women_api():
+    pregnant_women = get_pregnant_women()
+    return json.dumps(pregnant_women)
 
 @api.route('/facilities/count', methods=['GET'])
 def get_count():
@@ -71,7 +95,7 @@ def get_registered_pregnant_women():
     complete_data = []
     #PW ID	Age at first ANC registration	Marital Status	Village	Health Facility	Distance to Health Facility (Km)	Next visit Date	Next visit status	Nex Visit date 2	Recent Visit status	pending visit date	ANC Status	immunization (at birth)	immunization (at six weeks)	immunization (at ten weeks)
     data = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aSwAuVXu9fckCrQh9fNgW5/data.json", headers=headers)
-    facilities = data.json()
+    facilities = data.json()["results"]
     for facility in facilities:
         pw_id = ''
         age_at_first_registration = ''
@@ -100,7 +124,7 @@ def get_registered_pregnant_women():
             'immunization_at_ten_weeks': immunization_at_ten_weeks
         }
         complete_data.append(row)
-    return json.dumps(complete_data)
+    return json.dumps(facilities)
 
 @api.route('/notifications/sms/send-reminder-all', methods=['GET'])
 def get_reminder_all():
